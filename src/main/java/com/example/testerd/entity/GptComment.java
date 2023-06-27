@@ -8,6 +8,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
@@ -20,6 +21,7 @@ public class GptComment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long gptCommentId;
 
+    @NotNull
     private String requestContent;
 
     private String responseContent;
@@ -30,11 +32,11 @@ public class GptComment {
     @LastModifiedDate
     private LocalDateTime modifiedAt;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "interview_question_id")
     private InterviewQuestion interviewQuestion;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "interview_result_id")
     private InterviewResult interviewResult;
 }

@@ -15,11 +15,11 @@ public class RelatedQuestion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long relatedQuestionId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "head_question_id")
     private Question headQuestion;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tail_question_id")
     private Question tailQuestion;
 }

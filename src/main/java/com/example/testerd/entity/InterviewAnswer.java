@@ -28,11 +28,11 @@ public class InterviewAnswer {
     @LastModifiedDate
     private LocalDateTime modifiedAt;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "interview_question_id")
     private InterviewQuestion interviewQuestion;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "interview_result_id")
     private InterviewResult interviewResult;
 }

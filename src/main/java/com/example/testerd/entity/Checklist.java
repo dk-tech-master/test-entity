@@ -8,6 +8,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
@@ -20,6 +21,7 @@ public class Checklist {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long checklistId;
 
+    @NotNull
     private String content;
 
     @CreatedDate

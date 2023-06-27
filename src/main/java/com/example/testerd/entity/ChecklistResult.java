@@ -4,11 +4,13 @@ import com.example.testerd.type.YesNo;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
@@ -21,6 +23,9 @@ public class ChecklistResult {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long checklistResultId;
 
+    @NotNull
+    @Column(columnDefinition = "varchar(1) default 'N'")
+//    @ColumnDefault("'N'")
     private YesNo isChecked;
 
     @CreatedDate
@@ -29,15 +34,15 @@ public class ChecklistResult {
     @LastModifiedDate
     private LocalDateTime modifiedAt;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "checklist_id")
     private Checklist checklist;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "interview_question_id")
     private InterviewQuestion interviewQuestion;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "interview_result_id")
     private InterviewResult interviewResult;
 }
